@@ -17,4 +17,14 @@ public class Parser {
 		}
 		return leaderList;
 	}
+
+	public static String unParseLeaderboard(Leader[] leaderList) {
+		String returnedString = "##########\r\n";
+		for (int i = 0; i < leaderList.length; i++) {
+			if(leaderList[i] != null) {
+				returnedString += leaderList[i].getName() + ":" + leaderList[i].getPoints() + "\r\n";
+			}
+		}
+		return returnedString;
+	}
 }

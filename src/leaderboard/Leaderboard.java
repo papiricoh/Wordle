@@ -16,6 +16,14 @@ public class Leaderboard {
 		return this.leaders;
 	}
 
+	public Leader[] getArrayLeaderboard() {
+		Leader[] toReturn = new Leader[this.leaders.size()];
+		for (int i = 0; i < toReturn.length; i++) {
+			toReturn[i] = this.leaders.get(i);
+		}
+		return toReturn;
+	}
+
 	public Leader addToLeaderBoard(Leader newLeader) {
 		return newLeader;
 	}
