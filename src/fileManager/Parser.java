@@ -1,12 +1,14 @@
 package fileManager;
 
+import game.Word;
 import leaderboard.Leader;
 
 
 public class Parser {
+
+	private static final String separator = "\r\n";
+	private static final String dataSeparator = ":";
 	public static Leader[] parseLeaderboard(String toParse) {
-		String separator = "\r\n";
-		String dataSeparator = ":";
 		String[] separatedString = toParse.split(separator);
 		Leader[] leaderList = new Leader[separatedString.length];
 		for (int i = 0; i < separatedString.length; i++) {
@@ -26,5 +28,14 @@ public class Parser {
 			}
 		}
 		return returnedString;
+	}
+
+	public static Word[] parseWords(String toParse) {
+		String[] separatedString = toParse.split(separator);
+		Word[] words = new Word[separatedString.length];
+		for (int i = 0; i < separatedString.length; i++) {
+			words[i] = new Word(separatedString[i]);
+		}
+		return words;
 	}
 }
