@@ -3,6 +3,8 @@ package game;
 import config.Config;
 import fileManager.FileManager;
 import fileManager.Parser;
+import leaderboard.Leader;
+import leaderboard.Leaderboard;
 
 import java.security.InvalidParameterException;
 import java.util.Arrays;
@@ -10,10 +12,12 @@ import java.util.Scanner;
 
 public class GameManager {
     private Word[] words;
+    private Leaderboard leaderboard;
 
     public GameManager(String route) {
         FileManager fm = new FileManager(route);
         this.words = Parser.parseWords(fm.getRawData());
+        this.leaderboard = new Leaderboard(Parser.parseLeaderboard(new FileManager("database.txt").getRawData()));
     }
 
     public void gameMenu() {
@@ -28,9 +32,8 @@ public class GameManager {
                     startGame();
                     break;
                 case 2:
-                    FileManager fm = new FileManager("database.txt");
                     //TODO Short rawData
-                    System.out.println(fm.getRawData());
+                    System.out.println(this.leaderboard.getFormattedLeaderboard());
                     break;
                 case 3:
                     exit = true;
@@ -68,6 +71,14 @@ public class GameManager {
         int points = calculatePoints(successWords);
         System.out.println("You have earned: " + points + " points");
         System.out.println("Game Over");
+        System.out.print("\n\nInsert your name to register in the leaderboard: ");
+        newLeader(gameScanner.nextLine(), points);
+        System.out.println();
+    }
+
+    private void newLeader(String name, int points) {
+        Leader newLeader = new Leader(name, points);
+        this.leaderboard.addToLeaderBoard(newLeader);
     }
 
     private int calculatePoints(boolean[] successWords) {

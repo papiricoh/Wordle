@@ -1,5 +1,8 @@
 package leaderboard;
 
+import fileManager.FileManager;
+import fileManager.Parser;
+
 import java.util.ArrayList;
 
 public class Leaderboard {
@@ -25,7 +28,24 @@ public class Leaderboard {
 	}
 
 	public Leader addToLeaderBoard(Leader newLeader) {
+		this.leaders.add(newLeader);
+		saveToFile(newLeader);
 		return newLeader;
+	}
+
+	private void saveToFile(Leader newLeader) {
+		FileManager fm = new FileManager("database.txt");
+		fm.whiteUnparsedData(newLeader.getName() + ":" + newLeader.getPoints() + "\r\n");
+	}
+
+	public String getFormattedLeaderboard() {
+		String result = "";
+		for (int i = 0; i < this.leaders.size(); i++) {
+			if(this.leaders.get(i) != null) {
+				result += this.leaders.get(i).getName() + " : " + this.leaders.get(i).getPoints() + " pts\n";
+			}
+		}
+		return result;
 	}
 
 	@Override

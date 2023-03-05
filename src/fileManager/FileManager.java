@@ -47,7 +47,7 @@ public class FileManager {
 		return result;
 	}
 	
-	public void whiteDeparsedData(String data) {
+	public void whiteUnparsedData(String data) {
 		FileWriter writer;
 		try {
 			writer = new FileWriter(this.route, true);

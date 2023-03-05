@@ -1,3 +1,5 @@
 ##########
-Jose:100
-Julio:200
+Klio:20
+Julia:40
+Juan:40
+Pap:40
