@@ -58,4 +58,12 @@ public class WordRenderer {
         }
         return '_';
     }
+
+    public String getOriginalWord() {
+        String result = "";
+        for (int i = 0; i < this.orWord.length; i++) {
+            result += this.orWord[i];
+        }
+        return result;
+    }
 }

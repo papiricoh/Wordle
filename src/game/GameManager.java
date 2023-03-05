@@ -1,5 +1,6 @@
 package game;
 
+import config.Config;
 import fileManager.FileManager;
 import fileManager.Parser;
 import leaderboard.Leaderboard;
@@ -46,16 +47,22 @@ public class GameManager {
         for (int i = 0; i < this.words.length; i++) {
             WordRenderer wr = new WordRenderer(this.words[i]);
             System.out.println(wr.getRenderWord());
-            while(!wr.checkSuccess()) {
+            int counter = 0;
+            while(!wr.checkSuccess() && counter < Config.TRIES) {
                 String currentWord = gameScanner.nextLine();
                 try {
                     String renderedWord = wr.tryWord(currentWord);
                     System.out.println(renderedWord);
+                    counter++;
                 }catch (InvalidParameterException e) {
                     System.err.println(e.getMessage());
                 }
             }
-            System.out.println("Congratulations!! the word was: " + wr.getRenderWord());
+            if(wr.checkSuccess()) {
+                System.out.println("Congratulations!! the word was: " + wr.getRenderWord());
+            }else {
+                System.out.println("No more tries, the word was: " + wr.getOriginalWord());
+            }
         }
         System.out.println("Game Over");
     }
