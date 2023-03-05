@@ -7,9 +7,7 @@ import leaderboard.Leader;
 import leaderboard.Leaderboard;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class GameManager {
     private Word[] allWords;
@@ -18,7 +16,9 @@ public class GameManager {
 
     public GameManager(String route) {
         FileManager fm = new FileManager(route);
-        this.words = Parser.parseWords(fm.getRawData());
+        List<Word> wordList = Arrays.asList(Parser.parseWords(fm.getRawData()));
+        Collections.shuffle(wordList);
+        this.words = wordList.toArray(new Word[0]);
         this.allWords = Arrays.copyOf(this.words, this.words.length);
         this.leaderboard = new Leaderboard(Parser.parseLeaderboard(new FileManager("database.txt").getRawData()));
     }

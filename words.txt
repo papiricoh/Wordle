@@ -1,1 +1,9 @@
 Gatos
+Castillo
+Correa
+Heroe
+Ley
+Reino
+Problema
+Acontecimiento
+Atencion

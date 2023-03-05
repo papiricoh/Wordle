@@ -5,3 +5,5 @@ Casillas:203
 Alonso:201
 prueba2:40
 prueba3:0
+1st Game:475
+Fari:230

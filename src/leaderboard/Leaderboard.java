@@ -15,7 +15,6 @@ public class Leaderboard {
 		for (int i = 0; i < parsedLeader.length; i++) {
 			this.leaders.add(parsedLeader[i]);
 		}
-		sortList();
 	}
 
 	public void sortList() {
@@ -47,6 +46,7 @@ public class Leaderboard {
 	}
 
 	public String getFormattedLeaderboard() {
+		sortList();
 		String result = "";
 		for (int i = 0; i < this.leaders.size(); i++) {
 			if(this.leaders.get(i) != null) {
