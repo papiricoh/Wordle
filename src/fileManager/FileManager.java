@@ -29,11 +29,15 @@ public class FileManager {
 	private void updateRawData(String data) {
 		this.rawData = this.rawData + data;
 	}
-	
+
+	/**
+	 * Returns the raw data in String format after initialization
+	 * @return Plain text Raw Data
+	 */
 	public String getRawData() {
 		return this.rawData;
 	}
-	
+
 	public String getRawData(FileReader file) {
 		String result = "";
 		int character = 0;
@@ -46,7 +50,11 @@ public class FileManager {
 		}
 		return result;
 	}
-	
+
+	/**
+	 * Writes formatted plain text data in String format to the opened file
+	 * @param data Plain text data to write
+	 */
 	public void whiteUnparsedData(String data) {
 		FileWriter writer;
 		try {
