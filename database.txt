@@ -1,5 +1,7 @@
 ##########
-Klio:20
-Julia:40
-Juan:40
-Pap:40
+e:40
+javier:100
+Casillas:203
+Alonso:201
+prueba2:40
+prueba3:0

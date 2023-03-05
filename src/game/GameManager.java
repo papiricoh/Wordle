@@ -7,16 +7,19 @@ import leaderboard.Leader;
 import leaderboard.Leaderboard;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class GameManager {
+    private Word[] allWords;
     private Word[] words;
     private Leaderboard leaderboard;
 
     public GameManager(String route) {
         FileManager fm = new FileManager(route);
         this.words = Parser.parseWords(fm.getRawData());
+        this.allWords = Arrays.copyOf(this.words, this.words.length);
         this.leaderboard = new Leaderboard(Parser.parseLeaderboard(new FileManager("database.txt").getRawData()));
     }
 
@@ -24,24 +27,39 @@ public class GameManager {
         Scanner scan = new Scanner(System.in);
         boolean exit = false;
         while(!exit) {
-            System.out.println("WORDLE\n1: Start game\n2: Leaderboard\n3: Exit");
+            System.out.println("WORDLE\n1: Start game\n2: Custom game\n3: Leaderboard\n4: Exit");
             System.out.print("Select option: ");
             int selection = scan.nextInt();
             switch (selection) {
                 case 1:
+                    this.words = Arrays.copyOf(this.allWords, this.allWords.length);
                     startGame();
                     break;
                 case 2:
-                    //TODO Short rawData
-                    System.out.println(this.leaderboard.getFormattedLeaderboard());
+                    System.out.println("Input the length in number of the words");
+                    this.words = filterWords(scan.nextInt());
+                    startGame();
                     break;
                 case 3:
+                    System.out.println(this.leaderboard.getFormattedLeaderboard());
+                    break;
+                case 4:
                     exit = true;
                     break;
             }
         }
 
         scan.close();
+    }
+
+    private Word[] filterWords(int length) {
+        ArrayList<Word> listWords = new ArrayList<>();
+        for (int i = 0; i < this.words.length; i++) {
+            if (words[i].getFullWord().length() == length) {
+                listWords.add(words[i]);
+            }
+        }
+        return listWords.toArray(new Word[0]);
     }
 
     private void startGame() {

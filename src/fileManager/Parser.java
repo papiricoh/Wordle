@@ -3,18 +3,20 @@ package fileManager;
 import game.Word;
 import leaderboard.Leader;
 
+import java.util.Arrays;
+
 
 public class Parser {
 
 	private static final String separator = "\r\n";
 	private static final String dataSeparator = ":";
-	public static Leader[] parseLeaderboard(String toParse) {
+	public static Leader[] parseLeaderboard(String toParse) { //File Must have ####### in first line followed by a break line
 		String[] separatedString = toParse.split(separator);
-		Leader[] leaderList = new Leader[separatedString.length];
-		for (int i = 0; i < separatedString.length; i++) {
+		Leader[] leaderList = new Leader[separatedString.length -1];
+		for (int i = 1; i < separatedString.length; i++) {
 			if(!separatedString[i].equals("##########")) {
 				String[] leader_data = separatedString[i].split(dataSeparator);
-				leaderList[i] = new Leader(leader_data[0], Integer.parseInt(leader_data[1]));
+				leaderList[i -1] = new Leader(leader_data[0], Integer.parseInt(leader_data[1]));
 			}
 		}
 		return leaderList;

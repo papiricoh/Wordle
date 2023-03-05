@@ -1,6 +1,6 @@
 package leaderboard;
 
-public class Leader {
+public class Leader implements Comparable<Leader> {
     private String name;
     private int points;
 
@@ -15,6 +15,16 @@ public class Leader {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public int compareTo(Leader u) {
+        Integer actual_points = getPoints();
+        Integer input_points = u.getPoints();
+        if (actual_points == null || input_points == null) {
+            return 0;
+        }
+        return actual_points.compareTo(input_points);
     }
 
     @Override

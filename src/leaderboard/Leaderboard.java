@@ -4,6 +4,8 @@ import fileManager.FileManager;
 import fileManager.Parser;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Leaderboard {
 	ArrayList<Leader> leaders;
@@ -13,6 +15,12 @@ public class Leaderboard {
 		for (int i = 0; i < parsedLeader.length; i++) {
 			this.leaders.add(parsedLeader[i]);
 		}
+		sortList();
+	}
+
+	public void sortList() {
+		Collections.sort(leaders);
+		Collections.reverse(leaders);
 	}
 
 	public ArrayList<Leader> getLeaderboard() {
