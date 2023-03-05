@@ -1,7 +1,4 @@
-import fileManager.FileManager;
-import fileManager.Parser;
 import game.GameManager;
-import leaderboard.Leaderboard;
 
 public class Main {
 

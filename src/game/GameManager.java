@@ -3,7 +3,6 @@ package game;
 import config.Config;
 import fileManager.FileManager;
 import fileManager.Parser;
-import leaderboard.Leaderboard;
 
 import java.security.InvalidParameterException;
 import java.util.Arrays;
