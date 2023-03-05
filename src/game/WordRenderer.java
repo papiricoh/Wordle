@@ -31,13 +31,23 @@ public class WordRenderer {
             throw new InvalidParameterException("The Word must be " + this.orWord.length + " in length");
         }
         for (int i = 0; i < this.orWord.length; i++) {
-            if(this.orWord[i] == word.charAt(i)) {
-                this.renderedWord[i] = this.orWord[i];
-            }else {
-                this.renderedWord[i] = checkChar(word.charAt(i));
+            if(this.renderedWord[i] == '_' || this.renderedWord[i] == '*') {
+                if(this.orWord[i] == word.charAt(i)) {
+                    this.renderedWord[i] = this.orWord[i];
+                }else {
+                    this.renderedWord[i] = checkChar(word.charAt(i));
+                }
             }
         }
         return getRenderWord();
+    }
+    public boolean checkSuccess() {
+        for (int i = 0; i < this.orWord.length; i++) {
+            if(this.orWord[i] != this.renderedWord[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private char checkChar(char charAt) {
