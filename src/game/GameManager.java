@@ -43,6 +43,7 @@ public class GameManager {
 
     private void startGame() {
         Scanner gameScanner = new Scanner(System.in);
+        boolean[] successWords = new boolean[this.words.length];
         for (int i = 0; i < this.words.length; i++) {
             WordRenderer wr = new WordRenderer(this.words[i]);
             System.out.println(wr.getRenderWord());
@@ -58,12 +59,25 @@ public class GameManager {
                 }
             }
             if(wr.checkSuccess()) {
+                successWords[i] = true;
                 System.out.println("Congratulations!! the word was: " + wr.getRenderWord());
             }else {
                 System.out.println("No more tries, the word was: " + wr.getOriginalWord());
             }
         }
+        int points = calculatePoints(successWords);
+        System.out.println("You have earned: " + points + " points");
         System.out.println("Game Over");
+    }
+
+    private int calculatePoints(boolean[] successWords) {
+        int points = 0;
+        for (int i = 0; i < this.words.length; i++) {
+            if(successWords[i]) {
+                points += this.words[i].getPoints();
+            }
+        }
+        return points;
     }
 
     @Override
