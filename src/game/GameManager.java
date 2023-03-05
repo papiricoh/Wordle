@@ -4,6 +4,7 @@ import fileManager.FileManager;
 import fileManager.Parser;
 import leaderboard.Leaderboard;
 
+import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -20,11 +21,11 @@ public class GameManager {
         boolean exit = false;
         while(!exit) {
             System.out.println("WORDLE\n1: Start game\n2: Leaderboard\n3: Exit");
-            System.out.print("Select option");
+            System.out.print("Select option: ");
             int selection = scan.nextInt();
             switch (selection) {
                 case 1:
-                    startGame(scan);
+                    startGame();
                     break;
                 case 2:
                     FileManager fm = new FileManager("database.txt");
@@ -40,8 +41,23 @@ public class GameManager {
         scan.close();
     }
 
-    private void startGame(Scanner scan) {
-
+    private void startGame() {
+        Scanner gameScanner = new Scanner(System.in);
+        for (int i = 0; i < this.words.length; i++) {
+            WordRenderer wr = new WordRenderer(this.words[i]);
+            System.out.println(wr.getRenderWord());
+            while(!wr.checkSuccess()) {
+                String currentWord = gameScanner.nextLine();
+                try {
+                    String renderedWord = wr.tryWord(currentWord);
+                    System.out.println(renderedWord);
+                }catch (InvalidParameterException e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+            System.out.println("Congratulations!! the word was: " + wr.getRenderWord());
+        }
+        System.out.println("Game Over");
     }
 
     @Override
