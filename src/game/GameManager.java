@@ -65,6 +65,7 @@ public class GameManager {
     private void startGame() {
         Scanner gameScanner = new Scanner(System.in);
         boolean[] successWords = new boolean[this.words.length];
+        long startTime = System.currentTimeMillis();
         for (int i = 0; i < this.words.length; i++) {
             WordRenderer wr = new WordRenderer(this.words[i]);
             System.out.println(wr.getRenderWord());
@@ -86,7 +87,8 @@ public class GameManager {
                 System.out.println("No more tries, the word was: " + wr.getOriginalWord());
             }
         }
-        int points = calculatePoints(successWords);
+        long stopTime = System.currentTimeMillis();
+        int points = calculatePoints(successWords, stopTime - startTime);
         System.out.println("You have earned: " + points + " points");
         System.out.println("Game Over");
         System.out.print("\n\nInsert your name to register in the leaderboard: ");
@@ -99,7 +101,7 @@ public class GameManager {
         this.leaderboard.addToLeaderBoard(newLeader);
     }
 
-    private int calculatePoints(boolean[] successWords) {
+    private int calculatePoints(boolean[] successWords, long time) {
         int points = 0;
         for (int i = 0; i < this.words.length; i++) {
             if(successWords[i]) {
