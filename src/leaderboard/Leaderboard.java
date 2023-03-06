@@ -42,7 +42,7 @@ public class Leaderboard {
 
 	private void saveToFile(Leader newLeader) {
 		FileManager fm = new FileManager("database.txt");
-		fm.whiteUnparsedData(newLeader.getName() + ":" + newLeader.getPoints() + "\r\n");
+		fm.whiteUnparsedData(newLeader.getName() + ":" + newLeader.getPoints() + "\n");
 	}
 
 	public String getFormattedLeaderboard() {

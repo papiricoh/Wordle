@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class Parser {
 
-	private static final String separator = "\r\n";
+	private static final String separator = "\n";
 	private static final String dataSeparator = ":";
 	public static Leader[] parseLeaderboard(String toParse) { //File Must have ####### in first line followed by a break line
 		String[] separatedString = toParse.split(separator);
@@ -23,10 +23,10 @@ public class Parser {
 	}
 
 	public static String unParseLeaderboard(Leader[] leaderList) {
-		String returnedString = "##########\r\n";
+		String returnedString = "##########\n";
 		for (int i = 0; i < leaderList.length; i++) {
 			if(leaderList[i] != null) {
-				returnedString += leaderList[i].getName() + ":" + leaderList[i].getPoints() + "\r\n";
+				returnedString += leaderList[i].getName() + ":" + leaderList[i].getPoints() + "\n";
 			}
 		}
 		return returnedString;
