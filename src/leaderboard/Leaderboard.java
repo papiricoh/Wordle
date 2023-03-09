@@ -34,10 +34,9 @@ public class Leaderboard {
 		return toReturn;
 	}
 
-	public Leader addToLeaderBoard(Leader newLeader) {
+	public void addToLeaderBoard(Leader newLeader) {
 		this.leaders.add(newLeader);
 		saveToFile(newLeader);
-		return newLeader;
 	}
 
 	private void saveToFile(Leader newLeader) {
